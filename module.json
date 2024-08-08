@@ -7,7 +7,6 @@
     "esmodules": ["scripts/ChatCommands.js"],
     "compatibility": {
         "minimum": 11,
-        "maximum": 12,
         "verified": "12.327"
     },
     "scripts": [],
@@ -17,6 +16,6 @@
     "system": [],
     "languages": [],
     "url": "https://github.com/vaugusto273/Foundry-UsefulCommands",
-    "manifest": "https://raw.githubusercontent.com/vaugusto273/Foundry-UsefulCommands/main/module.json",
-    "download": ""
+    "manifest": "https://github.com/vaugusto273/Foundry-UsefulCommands/releases/download/v1.0.0/module.json",
+    "download": "https://github.com/vaugusto273/Foundry-UsefulCommands/releases/download/v1.0.0/module.zip"
 }
