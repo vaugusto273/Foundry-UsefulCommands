@@ -1,0 +1,22 @@
+{
+    "name": "Foundry-UsefulCommands",
+    "title": "Useful Commands",
+    "description": "Adds some chat commands to your foundry for various purposes.",
+    "version": "1.0.0",
+    "author": "Vaugusto273",
+    "esmodules": ["scripts/ChatCommands.js"],
+    "compatibility": {
+        "minimum": 11,
+        "maximum": 12,
+        "verified": "12.327"
+    },
+    "scripts": [],
+    "styles": [],
+    "packs": [],
+    "dependencies": [],
+    "system": [],
+    "languages": [],
+    "url": "https://github.com/vaugusto273/Foundry-UsefulCommands",
+    "manifest": "https://raw.githubusercontent.com/vaugusto273/Foundry-UsefulCommands/main/module.json",
+    "download": ""
+}
