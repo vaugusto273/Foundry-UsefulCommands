@@ -2,13 +2,21 @@
     "id": "Foundry-UsefulCommands",
     "title": "Useful Commands",
     "description": "Adds some chat commands to your foundry for various purposes.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "author": "Vaugusto273",
     "esmodules": ["scripts/ChatCommands.js"],
     "compatibility": {
         "minimum": "11",
         "maximum": "12",
-        "verified": "12.327"
+        "verified": "12.331"
+    },
+    "relationships": {
+        "requires": [{
+            "id": "_chatcommands",
+            "type": "module",
+            "manifest": "https://gitlab.com/woodentavern/foundryvtt-chat-command-lib/-/raw/master/src/module.json",
+            "compatibility": { "verified": "2.0.1" }
+        }]
     },
     "url": "https://github.com/vaugusto273/Foundry-UsefulCommands",
     "manifest": "https://github.com/vaugusto273/Foundry-UsefulCommands/releases/latest/download/module.json",
