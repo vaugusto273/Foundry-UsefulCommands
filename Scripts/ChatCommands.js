@@ -29,7 +29,7 @@ Hooks.on("chatCommandsReady", commands => {
             callback: (chat, parameters, messageData) => {
                 let feets = parameters;
                 let meter = feets * 0.3048;
-                let roundmeters = math.round(meter / 1.5) * 1.5;
+                let roundmeters = Math.round(meter / 1.5) * 1.5;
                 if (isNaN(feets)){
                     return { 
                         content: "Please, insert a valid number of feets",
