@@ -38,7 +38,7 @@ Hooks.on("chatCommandsReady", commands => {
                 }
                 else{
                     return{
-                        content: `<strong>${feets}fts</strong> is approximately <strong>${meter} meters</strong>.<br>rounding by the meters of a common grid (1.5 meters)<strong>${roundmeters}</strong>`,
+                        content: `<strong>${feets}fts</strong> is approximately <strong>${meter} meters</strong>.<br>rounding by the meters of a common grid (1.5 meters)<br><strong>${roundmeters} meters</strong>`,
                         whisper: [game.user.id]
                     }
                 }
@@ -323,6 +323,6 @@ Hooks.on("chatCommandsReady", commands => {
                 await TokenDocument.create(tokenData, { parent: scene });
             }
             }
-        }
+        },
     );
 });
