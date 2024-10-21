@@ -2,7 +2,7 @@
     "id": "Foundry-UsefulCommands",
     "title": "Useful Commands",
     "description": "Adds some chat commands to your foundry for various purposes.",
-    "version": "1.0.2",
+    "version": "1.1",
     "author": "Vaugusto273",
     "esmodules": ["scripts/ChatCommands.js"],
     "compatibility": {
