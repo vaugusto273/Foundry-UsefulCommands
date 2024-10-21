@@ -43,7 +43,7 @@ Hooks.on("chatCommandsReady", commands => {
                     }
                 }
             }
-        }
+        },
     );
     game.chatCommands.register(
         {
@@ -74,7 +74,7 @@ Hooks.on("chatCommandsReady", commands => {
                     }
                 }
             }
-        }
+        },
     );
     game.chatCommands.register(
         {
@@ -105,7 +105,7 @@ Hooks.on("chatCommandsReady", commands => {
                     }
                 }
             }
-        }
+        },
     );
     game.chatCommands.register(
         {
