@@ -114,23 +114,22 @@ Hooks.on("chatCommandsReady", commands => {
             aliases: ["/cnpc"],
             description: "Opens a NPC creation dialog",
             callback: (chat, parameters, messageData) => {
-                async function createNPC(name, race, bio, str, IsSTR, dex, IsDEX, con, IsCON, int, IsINT, wis, IsWIS, cha, IsCHA, ToSummon) {
-                    let npcData = {
-                        name: name,
-                        type: "npc", // Certifique-se de que o tipo esteja correto conforme o sistema que você está usando
-                        img: "icons/svg/mystery-man.svg", // Substitua pelo caminho da imagem do NPC
-                        system: {
-                            abilities: {
-                                str: { value: str, proficient: IsSTR },
-                                dex: { value: dex, proficient: IsDEX },
-                                con: { value: con, proficient: IsCON },
-                                int: { value: int, proficient: IsINT },
-                                wis: { value: wis, proficient: IsWIS },
-                                cha: { value: cha, proficient: IsCHA },
+                let npcData = {
+                    name: "",
+                    type: "npc", // Certifique-se de que o tipo esteja correto conforme o sistema que você está usando
+                    img: "icons/svg/mystery-man.svg", // Substitua pelo caminho da imagem do NPC
+                    system: {
+                        abilities: {
+                            str: { value: "", proficient: "" },
+                            dex: { value: "", proficient: "" },
+                            con: { value: "", proficient: "" },
+                            int: { value: "", proficient: "" },
+                            wis: { value: "", proficient: "" },
+                            cha: { value: "", proficient: "" },
                         },
                         details: {
-                            race: race,
-                            biography: { value: bio },
+                            race: "",
+                            biography: { value: "" },
                         },
                         currency: {
                             cp: "",
@@ -139,17 +138,18 @@ Hooks.on("chatCommandsReady", commands => {
                             pp: "",
                         },
                         skills: {},
-                        },
-                    };
+                    },
+                };
+                async function createNPC(npcData, ToSummon) {
                     await Actor.create(npcData);
                     let actorId = newActor.id;
-                    ui.notifications.info(`NPC "${name}" criado com sucesso!`);
+                    ui.notifications.info(`NPC "${npcData.name}" criado com sucesso!`);
                     ui.notifications.warn(ToSummon + " e " + actorId);
                     if (ToSummon == 1){
-                            Summon(name, actorId)
+                            Summon(npcData.name, actorId)
                         }
                     }
-                    function openAttributesDialog(name, race, bio) {
+                    function openAttributesDialog(npcData) {
                     new Dialog({
                         title: "Atributos do NPC",
                         content: `
@@ -208,39 +208,20 @@ Hooks.on("chatCommandsReady", commands => {
                             label: "OK",
                             callback: async (html) => {
                             // Obtém os atributos do NPC da entrada do usuário
-                            let npcSTR = parseInt(html.find('[name="npcSTR"]').val());
-                            let IsSTR = parseInt(html.find('[name="IsSTR"]').is(":checked") ? 1 : 0);
-                            let npcDEX = parseInt(html.find('[name="npcDEX"]').val());
-                            let IsDEX = parseInt(html.find('[name="IsDEX"]').is(":checked") ? 1 : 0);
-                            let npcCON = parseInt(html.find('[name="npcCON"]').val());
-                            let IsCON = parseInt(html.find('[name="IsCON"]').is(":checked") ? 1 : 0);
-                            let npcINT = parseInt(html.find('[name="npcINT"]').val());
-                            let IsINT = parseInt(html.find('[name="IsINT"]').is(":checked") ? 1 : 0);
-                            let npcWIS = parseInt(html.find('[name="npcWIS"]').val());
-                            let IsWIS = parseInt(html.find('[name="IsWIS"]').is(":checked") ? 1 : 0);
-                            let npcCHA = parseInt(html.find('[name="npcCHA"]').val());
-                            let IsCHA = parseInt(html.find('[name="IsCHA"]').is(":checked") ? 1 : 0);
+                            npcData.system.abilities.str.value = parseInt(html.find('[name="npcSTR"]').val());
+                            npcData.system.abilities.str.proficient = parseInt(html.find('[name="IsSTR"]').is(":checked") ? 1 : 0);
+                            npcData.system.abilities.dex.value = parseInt(html.find('[name="npcDEX"]').val());
+                            npcData.system.abilities.dex.proficient = parseInt(html.find('[name="IsDEX"]').is(":checked") ? 1 : 0);
+                            npcData.system.abilities.con.value = parseInt(html.find('[name="npcCON"]').val());
+                            npcData.system.abilities.con.proficient = parseInt(html.find('[name="IsCON"]').is(":checked") ? 1 : 0);
+                            npcData.system.abilities.int.value = parseInt(html.find('[name="npcINT"]').val());
+                            npcData.system.abilities.int.proficient = parseInt(html.find('[name="IsINT"]').is(":checked") ? 1 : 0);
+                            npcData.system.abilities.wis.value = parseInt(html.find('[name="npcWIS"]').val());
+                            npcData.system.abilities.wis.proficient = parseInt(html.find('[name="IsWIS"]').is(":checked") ? 1 : 0);
+                            npcData.system.abilities.cha.value = parseInt(html.find('[name="npcCHA"]').val());
+                            npcData.system.abilities.cha.proficient = parseInt(html.find('[name="IsCHA"]').is(":checked") ? 1 : 0);
                             let ToSummon = parseInt(html.find('[name="Summon"]').is(":checked") ? 1 : 0);
-                            // Cria o NPC com o nome, raça e atributos fornecidos
-                            console.log(IsCON)
-                            await createNPC(
-                                name,
-                                race,
-                                bio,
-                                npcSTR,
-                                IsSTR,
-                                npcDEX,
-                                IsDEX,
-                                npcCON,
-                                IsCON,
-                                npcINT,
-                                IsINT,
-                                npcWIS,
-                                IsWIS,
-                                npcCHA,
-                                IsCHA,
-                                ToSummon
-                            );
+                            await createNPC(npcData,ToSummon);
                         },
                     },
                         cancel: {
@@ -286,12 +267,11 @@ Hooks.on("chatCommandsReady", commands => {
                         label: "OK",
                         callback: (html) => {
                           // Obtém o nome do NPC da entrada do usuário
-                            let npcName = html.find('[name="npcName"]').val();
-                            let npcRace = html.find('[name="npcRace"]').val();
-                            let npcBio = html.find('[name="npcBio"]').val();
-                            if (npcName) {
-                            // Abre o segundo diálogo para pedir a raça do NPC
-                            openAttributesDialog(npcName,npcRace,npcBio);
+                            npcData.name = html.find('[name="npcName"]').val();
+                            npcData.system.details.race = html.find('[name="npcRace"]').val();
+                            npcData.system.details.biography.value = html.find('[name="npcBio"]').val();
+                            if (npcData.name) {
+                            openAttributesDialog(npcData);
                             } else {
                                 ui.notifications.warn("Por favor, insira um nome para o NPC.");
                             }
@@ -321,7 +301,7 @@ Hooks.on("chatCommandsReady", commands => {
                         y: position.y
                     };
                 await TokenDocument.create(tokenData, { parent: scene });
-            }
+            }//aqui
             }
         },
     );
